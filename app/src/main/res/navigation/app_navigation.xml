@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/fxRateHome">
+
+
+    <fragment
+        android:id="@+id/fxRateHome"
+        android:name="com.riyas.fxrate.view.fragments.FxRateHomeFragment"
+        tools:layout="@layout/fragment_fx_rate_home">
+        <action
+            android:id="@+id/goToHistoricRateHome"
+            app:destination="@id/fxHistoricRateHome"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fxHistoricRateHome"
+        android:name="com.riyas.fxrate.view.fragments.FxHistoricRateFragment"
+        tools:layout="@layout/fragment_fx_rate_home">
+        <action
+            android:id="@+id/goBackToHome"
+            app:popUpTo="@id/fxHistoricRateHome" />
+        <!--  <action
+              android:id="@+id/goToHomeFragment"
+              app:destination="@id/homeFragment"
+              app:enterAnim="@anim/slide_in_right"
+              app:exitAnim="@anim/slide_out_left"
+              app:popEnterAnim="@anim/slide_in_left"
+              app:popExitAnim="@anim/slide_out_right" />-->
+
+    </fragment>
+
+
+</navigation>

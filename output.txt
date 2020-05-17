@@ -1,0 +1,18 @@
+Output of the program:
+
+ User ID : 4 Username : Ian Kehoe
+ User ID : 5 Username : Nora Dempsey
+ User ID : 6 Username : Theresa Enright
+ User ID : 8 Username : Eoin Ahearn
+ User ID : 11 Username : Richard Finnegan
+ User ID : 12 Username : Christina McArdle
+ User ID : 13 Username : Olive Ahearn
+ User ID : 15 Username : Michael Ahearn
+ User ID : 17 Username : Patricia Cahill
+ User ID : 23 Username : Eoin Gallagher
+ User ID : 24 Username : Rose Enright
+ User ID : 26 Username : Stephen McArdle
+ User ID : 29 Username : Oliver Ahearn
+ User ID : 30 Username : Nick Enright
+ User ID : 31 Username : Alan Behan
+ User ID : 39 Username : Lisa Ahearn

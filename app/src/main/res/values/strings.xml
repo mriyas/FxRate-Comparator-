@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">FxRate Comparator</string>
+    <string name="network_failure">You are offline. Please check your internet connection</string>
+    <string name="fetching_data">Fetching data..please wait..</string>
+    <string name="something_went_wrong">Something went wrong..please try again..</string>
+    <string name="euro">EUR</string>
+    <string name="date">Date</string>
+    <string name="fx_selection_msg">Select two currencies to view the exchange rates of selected currencies over the last 5 days period</string>
+    <string name="enable_fx_selection_msg">Enable historic data to view the exchange rates over the last 5 days period</string>
+    <string name="historic_data">Historic Data</string>
+    <string name="line_graph">Line Graph</string>
+    <string name="back">Back</string>
+    <string name="note_for_graph">NOTE: The graph showing only the historic value of the currencies in 1 EUR</string>
+    <string name="data_not_available">Data not vailable!!</string>
+</resources>

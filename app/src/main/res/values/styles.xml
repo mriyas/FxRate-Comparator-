@@ -1,0 +1,38 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"><!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
+
+    </style>
+    <style name="HeaderBar">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+    <style name="til_input" parent="Widget.Design.TextInputLayout">
+        <!-- Customize your theme here. -->
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">72dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">bottom</item>
+    </style>
+    <style name="et_input" parent="Widget.AppCompat.EditText">
+        <!-- Customize your theme here. -->
+        <item name="android:layout_height">48dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">7dp</item>
+        <item name="android:top">5dp</item>
+        <item name="android:solidColor">@android:color/transparent</item>
+    </style>
+</resources>

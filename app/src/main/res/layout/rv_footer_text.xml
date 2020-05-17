@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+        <variable
+            name="footerText"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--
+                android:onClick="@{(v)->fr.onMenuClick(data)}"
+        -->
+
+        <TextView
+            android:paddingHorizontal="30dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:text="@{footerText}"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <!--
+
+    -->
+
+</layout>

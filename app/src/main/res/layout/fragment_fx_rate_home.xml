@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.riyas.fxrate.view_model.FXViewModel"></variable>
+
+        <variable
+            name="fr"
+            type="com.riyas.fxrate.view.fragments.FxRateHomeFragment"></variable>
+
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cb_historicData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:onClick="@{(v)->fr.enableHistoricData(v)}"
+            android:text="@string/historic_data"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_label" />
+
+
+        <TextView
+            android:id="@+id/tv_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/euro"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/et_fx"
+            app:layout_constraintRight_toLeftOf="@+id/et_fx"
+            app:layout_constraintTop_toTopOf="@+id/et_fx" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_fx"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:afterTextChanged="@{(text) -> fr.onTextChanged(text)}"
+            android:background="@drawable/et_background"
+            android:inputType="numberDecimal"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="6dp"
+            android:text="1"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_main"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cb_historicData" />
+
+
+        <TextView
+            android:id="@+id/tv_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="30dp"
+            android:text="@string/fetching_data"
+            android:visibility="@{(viewModel.mTodaysFxRateList.size()&lt;=0&amp;&amp;viewModel.mApiOnGoing)?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{(viewModel.mTodaysFxRateList.size()&lt;=0&amp;&amp;viewModel.mApiOnGoing)?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/tv_msg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

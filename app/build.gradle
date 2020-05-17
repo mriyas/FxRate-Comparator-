@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+android {
+    compileSdkVersion rootProject.mCompileSdkVersion
+    buildToolsVersion rootProject.mBuildToolsVersion
+    defaultConfig {
+        applicationId "com.riyas.fxrate"
+        minSdkVersion rootProject.mMinSdkVersion
+        targetSdkVersion rootProject.mTargetSdkVersion
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String', 'WEB_SERVICE_BASE_URL', '"http://data.fixer.io/api/"'
+        buildConfigField 'String', 'ACCESS_KEY', '"5600d53370cfcd486bf263d6b54ab97d"'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version_ktx"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version_ktx"
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+   // implementation project(path: ':retrofit')
+    implementation "com.squareup.retrofit2:retrofit:2.6.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.6.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.6.0"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.4"
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.google.android.exoplayer:exoplayer:2.11.3'
+    testImplementation 'org.mockito:mockito-core:1.10.19'
+    testImplementation "org.powermock:powermock:1.6.5"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+
+}

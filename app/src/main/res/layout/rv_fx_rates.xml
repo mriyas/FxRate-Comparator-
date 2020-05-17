@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.riyas.fxrate.model.FxRate" />
+
+        <variable
+            name="position"
+            type="Integer" />
+        <variable
+            name="enabledHistoricData"
+            type="Boolean" />
+
+
+        <import type="android.view.View" />
+
+        <variable
+            name="fr"
+            type="com.riyas.fxrate.view.fragments.FxRateHomeFragment" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--
+                android:onClick="@{(v)->fr.onMenuClick(data)}"
+        -->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+
+
+            android:paddingVertical="8dp">
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/cb_selected"
+                android:checked="@{fr.mViewModel.hasAddedToCompareList(data)}"
+                app:layout_constraintWidth_percent=".1"
+                android:onClick="@{(v)->fr.onClick(v,data)}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="@{enabledHistoricData?View.VISIBLE:View.GONE}"
+                />
+
+            <TextView
+                android:id="@+id/tv_currencyCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:minHeight="36dp"
+                android:gravity="left|center_vertical"
+                android:text="@{``+data.currencyCode}"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/cb_selected"
+                app:layout_constraintLeft_toRightOf="@+id/cb_selected"
+                app:layout_constraintTop_toTopOf="@+id/cb_selected"
+                app:layout_constraintWidth_percent=".3" />
+
+            <TextView
+                android:id="@+id/tv_currencyRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+
+                android:text="@{fr.mViewModel.getMultipliedValue(data.rate)}"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_currencyCode"
+                app:layout_constraintTop_toTopOf="@+id/tv_currencyCode"
+                app:layout_constraintWidth_percent=".6" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/divider"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+    </LinearLayout>
+    <!--
+
+    -->
+
+</layout>
