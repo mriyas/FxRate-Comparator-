@@ -12,6 +12,9 @@ import com.riyas.fxrate.databinding.RvFxRatesBinding
 import com.riyas.fxrate.model.FxRate
 import com.riyas.fxrate.view.fragments.FxRateHomeFragment
 
+/**
+ * Recycler Adapter class for Toady's exchange rate
+ */
 
 class FxRateHomeFragmentAdapter(var mData: List<FxRate>?) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -63,6 +66,10 @@ class FxRateHomeFragmentAdapter(var mData: List<FxRate>?) :
 
     }
 
+    /**
+     * Last row will be used for footer to add some hint the user to enable the historic data
+     * or to select 2 rows for comparison
+     */
     override fun getItemViewType(position: Int): Int {
         if (position == mData?.size) {
             return TYPE_FOOTER
@@ -89,26 +96,43 @@ class FxRateHomeFragmentAdapter(var mData: List<FxRate>?) :
         }
     }
 
+    /**
+     * Sets data to populate recycler view
+     */
     fun setData(it: List<FxRate>?) {
         mData = it
         notifyDataSetChanged()
     }
 
+    /**
+     * Changes the multiplication factor and the data will be recalculated based on the multiplier
+     * by data binding
+     */
     fun changeMultiplier() {
 
         notifyDataSetChanged()
     }
 
+    /**
+     * Sets flag to enable historic data comparison, this flag will determine whether to show individual
+     * row checkboxes
+     */
     fun enableHistoricData(checked: Boolean) {
         this.enableHistoricData=checked
         notifyDataSetChanged()
     }
 
+    /**
+     * Sets/changes footer texts
+     */
     fun setFooter(msg: String) {
         this.mFooterText=msg
         notifyDataSetChanged()
     }
 
+    /**
+     * View holder class for data
+     */
 
     class FxRateViewHolder(val binding: RvFxRatesBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -126,6 +150,9 @@ class FxRateHomeFragmentAdapter(var mData: List<FxRate>?) :
         }
     }
 
+    /**
+     * Footer view holder class
+     */
     class FxRateFooterViewHolder(val binding: RvFooterTextBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

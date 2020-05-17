@@ -30,6 +30,9 @@ import com.riyas.fxrate.databinding.FragmentBottomGraphBinding
 import com.riyas.fxrate.databinding.FragmentFxRateHomeBinding
 import com.riyas.fxrate.view_model.FXViewModel
 
+/**
+ * Bottom sheet dialog to display graph
+ */
 
 class GraphBottomSheetFragment : BottomSheetDialogFragment() {
 
@@ -64,9 +67,9 @@ class GraphBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
 
-
-
-
+    /**
+     * Populating the graph from the historic data
+     */
     private fun setData() {
 
         val it=mViewModel.mCurrentHistoricData

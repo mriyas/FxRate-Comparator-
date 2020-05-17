@@ -20,7 +20,9 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import com.github.mikephil.charting.data.Entry
 
-
+/**
+ * ViewModel class which will be acting as the back bone of the app
+ */
 class FXViewModel(application: Application) : BaseViewModel(application) {
 
     private var mCurrenciesSymbols: String? = null
@@ -35,12 +37,18 @@ class FXViewModel(application: Application) : BaseViewModel(application) {
         setCurrencyCodes()
     }
 
+    /**
+     * Returns the currency with multiplying factor entered in the dashboard
+     */
 
     fun getMultipliedValue(value: Double): String {
         val data = (value.toBigDecimal() * mCurrentMultiplier.get()!!) as BigDecimal
         return String.format("%.5f", data)
     }
 
+    /**
+     * Initializing currency symbols to fetched
+     */
     private fun setCurrencyCodes() {
         /*USD, EUR, JPY, GBP,
         AUD, CAD, CHF, CNY, SEK, NZD*/
@@ -68,6 +76,9 @@ class FXViewModel(application: Application) : BaseViewModel(application) {
 
     }
 
+    /**
+     * Fetching today's exchange rate
+     */
     fun getTodaysRate() {
 
         if (!checkConnection(mApplication)) {
@@ -102,6 +113,9 @@ class FXViewModel(application: Application) : BaseViewModel(application) {
         // return mTodaysFxRateList
     }
 
+    /**
+     * Fetch last five days currency rate frm api
+     */
     fun getLastFiveDaysRate(): MutableLiveData<HashMap<String, List<FxRate>?>?>? {
 
         val out = MutableLiveData<HashMap<String, List<FxRate>?>?>()
@@ -139,6 +153,9 @@ class FXViewModel(application: Application) : BaseViewModel(application) {
         return out
     }
 
+    /**
+     * Notifying error to user
+     */
     private fun notifyError(
         code: Int = AppConstants.SOMETHING_WENT_WRONG,
         msg: String? = mApplication.getString(R.string.something_went_wrong)
@@ -151,6 +168,9 @@ class FXViewModel(application: Application) : BaseViewModel(application) {
 
     }
 
+    /**
+     * Returns the list of historical dates, typically the last five days
+     */
     private fun getHistoricalDates(): ArrayList<String> {
 
         val out = ArrayList<String>()
@@ -165,15 +185,24 @@ class FXViewModel(application: Application) : BaseViewModel(application) {
 
     }
 
+    /**
+     * Get previous date
+     */
     private fun getPreviousDate(noOfDays: Int): Date {
         return Date(System.currentTimeMillis() - noOfDays * 24 * 60 * 60 * 1000)
     }
 
+    /**
+     * Returns date string formatted in yyyy-MM-dd
+     */
     private fun getDateString(date: Date): String {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         return dateFormat.format(date)
     }
 
+    /**
+     * Returns comma separated string of selected currency
+     */
     private fun getSelectedSymbols(): String? {
         if (!mCurrencyComparatorList.isNullOrEmpty()) {
             var out = ""
@@ -191,6 +220,9 @@ class FXViewModel(application: Application) : BaseViewModel(application) {
         return null
     }
 
+    /**
+     * Returns currency rate list from map
+     */
     private fun getCurrencyRateList(map: Map<String, Double>?): List<FxRate>? {
         val list = ArrayList<FxRate>()
         if (!map.isNullOrEmpty()) {
@@ -203,10 +235,16 @@ class FXViewModel(application: Application) : BaseViewModel(application) {
         return list
     }
 
+    /**
+     * Checking the item has already added to compare
+     */
     fun hasAddedToCompareList(fxRate: FxRate): Boolean {
         return mCurrencyComparatorList?.contains(fxRate)!!
     }
 
+    /**
+     * Add or removes the an item for comparing, returns true if the list become size 2
+     */
     fun addOrRemoveCompareList(fxRate: FxRate): Boolean {
         if (fxRate.isSelected) {
             if (mCurrencyComparatorList.isNullOrEmpty()) {
@@ -238,6 +276,9 @@ class FXViewModel(application: Application) : BaseViewModel(application) {
 
     }
 
+    /**
+     * Clears the comparator list
+     */
     fun clearCompareList() {
         if(mCurrencyComparatorList?.size!!>0){
             for(currency in mCurrencyComparatorList!!){
@@ -249,6 +290,9 @@ class FXViewModel(application: Application) : BaseViewModel(application) {
 
     }
 
+    /**
+     * Corotine exception handler
+     */
     val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         mApiOnGoing.set(false)
         exception.printStackTrace()
@@ -256,6 +300,9 @@ class FXViewModel(application: Application) : BaseViewModel(application) {
         notifyError()
     }
 
+    /**
+     * Populating x axis names
+     */
     fun getXAxisValues(data: HashMap<String, List<FxRate>?>): ArrayList<String> {
 
         val xVals = ArrayList<String>()
@@ -271,6 +318,9 @@ class FXViewModel(application: Application) : BaseViewModel(application) {
         return xVals
     }
 
+    /**
+     * Populating the Y axis data for ploting the graph
+     */
     fun getYAxisValues(
         data: HashMap<String, List<FxRate>?>?,
         pos: Int

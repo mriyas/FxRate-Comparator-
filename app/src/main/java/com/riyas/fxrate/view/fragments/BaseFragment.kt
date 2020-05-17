@@ -14,6 +14,15 @@ import com.riyas.fxrate.model.AppConstants
 import com.riyas.fxrate.view.receiver.ConnectivityReceiver
 import com.riyas.fxrate.view_model.FXViewModel
 
+/**
+ * Base fragment class in which it observe the app states like connectivity changes and failure case
+ * and this class will be used as the parent class of other Fragments
+ * @see FxHistoricRateFragment
+ * @see FxRateHomeFragment
+ * @see AppState
+ *
+ *
+ */
 open abstract class BaseFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiverListener {
     val TAG = javaClass.simpleName
     val mViewModel: FXViewModel by activityViewModels()
@@ -47,6 +56,9 @@ open abstract class BaseFragment : Fragment(), ConnectivityReceiver.Connectivity
         })
     }
 
+    /**
+     * shows snack bar with a message
+     */
     fun showSnackBar(msg: String) {
         if (null == activity)
             return
@@ -59,6 +71,9 @@ open abstract class BaseFragment : Fragment(), ConnectivityReceiver.Connectivity
         }
     }
 
+    /**
+     * Abstarct method to set UI message it might be error or warning message
+     */
     abstract fun setMessage(error: String?, reverseCheck: Boolean = false)
 
 
@@ -67,6 +82,9 @@ open abstract class BaseFragment : Fragment(), ConnectivityReceiver.Connectivity
 
     }
 
+    /**
+     * Alerting network failure
+     */
     fun networkFailure() {
         val msg = activity?.getString(R.string.network_failure)
         setMessage(msg)
@@ -76,6 +94,9 @@ open abstract class BaseFragment : Fragment(), ConnectivityReceiver.Connectivity
         )
     }
 
+    /**
+     * Showing dialog with a message
+     */
     fun showDialog(
         message: String?,
         okMsg: String?, clickListener: DialogInterface.OnClickListener? = null
@@ -101,6 +122,9 @@ open abstract class BaseFragment : Fragment(), ConnectivityReceiver.Connectivity
         mAlert?.show()
     }
 
+    /**
+     * Dismiss dialog if any
+     */
     fun dismissDialog() {
 
         if (mAlert?.isShowing == true) {
@@ -108,7 +132,9 @@ open abstract class BaseFragment : Fragment(), ConnectivityReceiver.Connectivity
         }
     }
 
-
+    /**
+     * Shows bottom sheet dialog
+     */
     protected fun showBottomDialog(bottomSheetFragment: BottomSheetDialogFragment) {
         if (!bottomSheetFragment.isAdded) {
             bottomSheetFragment.isCancelable = true

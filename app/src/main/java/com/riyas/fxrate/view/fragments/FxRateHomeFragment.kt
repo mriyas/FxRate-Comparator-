@@ -23,7 +23,9 @@ import com.riyas.fxrate.databinding.FragmentFxRateHomeBinding
 import com.riyas.fxrate.model.FxRate
 import com.riyas.fxrate.view.receiver.ConnectivityReceiver
 
-
+/**
+ * Toady's exchange rate listing fragment
+ */
 class FxRateHomeFragment : BaseFragment() {
     var mAdapter: FxRateHomeFragmentAdapter? = null
     var mBinding: FragmentFxRateHomeBinding? = null
@@ -60,6 +62,9 @@ class FxRateHomeFragment : BaseFragment() {
 
     }
 
+    /**
+     * Observes today's exchange rate api data
+     */
     private fun observeData() {
 
         GlobalScope.launch(Dispatchers.Main) {
@@ -78,7 +83,10 @@ class FxRateHomeFragment : BaseFragment() {
             setMsg()
         }
     }
-
+    /**
+     * Sets UI error or warning messages
+     * @param reverseCheck true for warnings false for errors
+     */
     override fun setMessage(error: String?, reverseCheck:Boolean) {
         if (mAdapter?.itemCount!! <= 0) {
             mBinding?.progressBar2?.visibility = if(reverseCheck!!)View.VISIBLE else View.GONE
@@ -90,6 +98,9 @@ class FxRateHomeFragment : BaseFragment() {
         }
     }
 
+    /**
+     * Sets ui messages
+     */
     private fun setMsg() {
         setMessage(getString(R.string.fetching_data),true)
         if (mAdapter?.itemCount!! > 0) {
@@ -108,6 +119,9 @@ class FxRateHomeFragment : BaseFragment() {
         mBinding?.cbHistoricData?.isChecked=false
     }
 
+    /**
+     * Text change watcher from data binding for multiplier of currency value
+     */
      fun onTextChanged(s: Editable) {
         logI(TAG, "onTextChanged ${s.toString()}")
         if (!s.isNullOrEmpty()) {
@@ -119,6 +133,9 @@ class FxRateHomeFragment : BaseFragment() {
 
     }
 
+    /**
+     * Historic check box button click
+     */
     fun enableHistoricData(view: View) {
         if(view is CheckBox) {
             mAdapter?.enableHistoricData(view.isChecked)
@@ -136,7 +153,9 @@ class FxRateHomeFragment : BaseFragment() {
 
     }
 
-
+    /**
+     * Individual row check box button click
+     */
     fun onClick(checkBox: View,fxRate: FxRate) {
         fxRate.isSelected = !fxRate.isSelected
         val state = mViewModel.addOrRemoveCompareList(fxRate)
@@ -147,6 +166,9 @@ class FxRateHomeFragment : BaseFragment() {
         }
     }
 
+    /**
+     * listnes internet connectivity changes
+     */
     override fun onNetworkConnectionChanged(isConnected: Boolean) {
         if (mAdapter?.itemCount!! <= 0) {
             if(isConnected) {

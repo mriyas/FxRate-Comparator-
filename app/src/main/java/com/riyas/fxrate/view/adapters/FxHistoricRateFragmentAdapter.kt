@@ -12,6 +12,9 @@ import com.riyas.fxrate.databinding.RvHistoricRatesHeaderBinding
 import com.riyas.fxrate.model.FxRate
 import com.riyas.fxrate.view.fragments.FxHistoricRateFragment
 
+/**
+ * RecyclerView Adapter class which populated historic data
+ */
 
 class FxHistoricRateFragmentAdapter() :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -63,6 +66,9 @@ class FxHistoricRateFragmentAdapter() :
 
     }
 
+    /**
+     * The first row will be used for header
+     */
     override fun getItemViewType(position: Int): Int {
         if (position == 0) {
             return TYPE_HEADER
@@ -107,6 +113,10 @@ class FxHistoricRateFragmentAdapter() :
         }
     }
 
+    /**
+     * This method will convert map into list and sort it in descending order and that list
+     * will be used to populate recycler view
+     */
     fun setData(it:HashMap<String,List<FxRate>?>?) {
         if(!it.isNullOrEmpty()) {
             this.mMap = it
@@ -120,10 +130,16 @@ class FxHistoricRateFragmentAdapter() :
     }
 
 
-
+    /**
+     * Data View Holder class for historic data
+     */
     class HistoricDataViewHolder(val binding: RvHistoricRatesBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
+        /**
+         * Binds the rates
+         * @param rate1 : rate of currency code1
+         * @param rate2 : rate of currency code2
+         */
         fun bind(
             pos: Int,
             fr: FxHistoricRateFragment?,date:String?, rate1: Double, rate2: Double
@@ -137,6 +153,9 @@ class FxHistoricRateFragmentAdapter() :
         }
     }
 
+    /**
+     * Header view holder class
+     */
     class HistoricHeaderViewHolder(val binding: RvHistoricRatesHeaderBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

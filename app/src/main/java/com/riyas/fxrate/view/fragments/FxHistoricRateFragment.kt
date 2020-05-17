@@ -18,7 +18,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-
+/**
+ * Historic data fragment
+ */
 class FxHistoricRateFragment : BaseFragment() {
 
     var mAdapter: FxHistoricRateFragmentAdapter? = null
@@ -56,6 +58,10 @@ class FxHistoricRateFragment : BaseFragment() {
 
     }
 
+    /**
+     * Sets UI error or warning messages
+     * @param reverseCheck true for warnings false for errors
+     */
     override fun setMessage(error: String?, reverseCheck: Boolean) {
         if (mAdapter?.itemCount!! <= 0) {
             mBinding?.progressBar2?.visibility = if (reverseCheck!!) View.VISIBLE else View.GONE
@@ -67,10 +73,16 @@ class FxHistoricRateFragment : BaseFragment() {
         }
     }
 
+    /**
+     * Back button click
+     */
     fun onBack() {
         activity?.onBackPressed()
     }
 
+    /**
+     * Observs the historic api data changes
+     */
     private fun observeData() {
         GlobalScope.launch(Dispatchers.Main) {
             mViewModel.getLastFiveDaysRate()?.observe(viewLifecycleOwner, Observer {
@@ -87,6 +99,9 @@ class FxHistoricRateFragment : BaseFragment() {
         }
     }
 
+    /**
+     * Shows Graph
+     */
     fun showGraph() {
 
         if (!mViewModel.mCurrentHistoricData.value.isNullOrEmpty()) {
@@ -96,6 +111,9 @@ class FxHistoricRateFragment : BaseFragment() {
         }
     }
 
+    /**
+     * Observes connectivity changes
+     */
     override fun onNetworkConnectionChanged(isConnected: Boolean) {
         if (mAdapter?.itemCount!! <= 0) {
             if (isConnected) {
