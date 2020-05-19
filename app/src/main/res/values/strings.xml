@@ -12,4 +12,5 @@
     <string name="back">Back</string>
     <string name="note_for_graph">NOTE: The graph showing only the historic value of the currencies in 1 EUR</string>
     <string name="data_not_available">Data not vailable!!</string>
+    <string name="doubleClickExit">Press \"BACK\" again to exit from app</string>
 </resources>
